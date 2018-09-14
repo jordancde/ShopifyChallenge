@@ -3,7 +3,15 @@
 
 This project was built using Django and Django-graphene. I haven't used GraphQL before so please forgive any conventions best practices, etc. I haven't followed! I've tried my best to follow the provided documentation.
 
-This project is live and deployed via Kubernetes as of this commit. It can be accessed along with 
+This project is live and deployed via Kubernetes as of this commit. Please see the [Demo](#demo) section to access it.
+
+# Table of Contents
+- [Prerequisites](#prerequisites)
+- [Installation and Setup](#installation-and-setup)
+- [Demo](#demo)
+- [API](#api)
+    - [Subthing](#product)
+- [Testing](#testing)
 
 ## Prerequisites
 
@@ -23,8 +31,9 @@ python manage.py runserver
 ```
 If that doesn't work, try praying and/or doing a good deed before running again.
 
-## Deployed Demo
+## Demo
 
+Login
 A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
 
 ## API
