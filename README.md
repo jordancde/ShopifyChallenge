@@ -1,78 +1,36 @@
-# Product Name
-> Short blurb about what your product does.
+# Shopify Internship Challenge
+> Submission by Jordan Dearsley (SoftEng UWaterloo)
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
+This project was built using Django and Django-graphene. I haven't used GraphQL before so please forgive any conventions best practices, etc. I haven't followed! I've tried my best to follow the provided documentation.
 
-One to two paragraph statement about your product and what it does.
+This project is live and deployed via Kubernetes as of this commit. It can be accessed along with 
 
-![](header.png)
+## Prerequisites
 
-## Installation
+- Python 3.5+
+- PostgresQL installed and running on host
+- DB with name "shopdb" created with proper permissions
+- Django and any other pip dependencies it complains about during startup (I will put together a virtual env if I get the chance!)
 
-OS X & Linux:
+## Installation and Setup
 
-```sh
-npm install my-crazy-module --save
+Clone the repo as-is, and in the root directory, run:
 ```
-
-Windows:
-
-```sh
-edit autoexec.bat
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
 ```
+If that doesn't work, try praying and/or doing a good deed before running again.
 
-## Usage example
+## Deployed Demo
 
 A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
 
-_For more examples and usage, please refer to the [Wiki][wiki]._
+## API
 
-## Development setup
+A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
 
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
+## Testing
 
-```sh
-make install
-npm test
-```
-
-## Release History
-
-* 0.2.1
-    * CHANGE: Update docs (module code remains unchanged)
-* 0.2.0
-    * CHANGE: Remove `setDefaultXYZ()`
-    * ADD: Add `init()`
-* 0.1.1
-    * FIX: Crash when calling `baz()` (Thanks @GenerousContributorName!)
-* 0.1.0
-    * The first proper release
-    * CHANGE: Rename `foo()` to `bar()`
-* 0.0.1
-    * Work in progress
-
-## Meta
-
-Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
-
-Distributed under the XYZ license. See ``LICENSE`` for more information.
-
-[https://github.com/yourname/github-link](https://github.com/dbader/)
-
-## Contributing
-
-1. Fork it (<https://github.com/yourname/yourproject/fork>)
-2. Create your feature branch (`git checkout -b feature/fooBar`)
-3. Commit your changes (`git commit -am 'Add some fooBar'`)
-4. Push to the branch (`git push origin feature/fooBar`)
-5. Create a new Pull Request
-
-<!-- Markdown link & img dfn's -->
-[npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/datadog-metrics
-[npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
-[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
-[wiki]: https://github.com/yourname/yourproject/wiki
+A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
