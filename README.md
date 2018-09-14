@@ -1,6 +1,8 @@
 # Shopify Internship Challenge
 > Submission by Jordan Dearsley (SoftEng UWaterloo)
 
+[Link to Challenge](https://docs.google.com/document/d/1YYDRf_CgQRryf5lZdkZ2o3Hm3erFSaISL1L1s8kLqsI/edit)
+
 This project was built using Django and Django-graphene. I haven't used GraphQL before so please forgive any conventions best practices, etc. I haven't followed! I've tried my best to follow the provided documentation.
 
 This project is live and deployed via Kubernetes as of this commit. Please see the [Demo](#demo) section to access it.
