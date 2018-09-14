@@ -273,7 +273,7 @@ class APITest(TestCase):
     def test_remove_add_product_shop(self):
         executed = self.client.execute('''
             mutation RemoveProductFromShop {
-                removeProductFromShop(shop_id: '''+str(self.shop.pk)+''',product_id: '''+str(self.product.pk)+''') {
+                removeProductFromShop(shopId: '''+str(self.shop.pk)+''',productId: '''+str(self.product.pk)+''') {
                     shop{
                         name
                         products{
@@ -287,6 +287,136 @@ class APITest(TestCase):
         )
         # START HERE, find out why this isn't working
         self.shop.refresh_from_db()
-        self.assertEquals(self.shop.products.all(),None)
+        self.assertEquals(self.shop.products.all().count(),0)
+
+        executed = self.client.execute('''
+            mutation AddProductFromShop {
+                addProductToShop(shopId: '''+str(self.shop.pk)+''',productId: '''+str(self.product.pk)+''') {
+                    shop{
+                        name
+                        products{
+                            id
+                        }
+                    }
+                    ok
+                }
+            }
+        '''
+        )
+        # START HERE, find out why this isn't working
+        self.shop.refresh_from_db()
+        self.assertEquals(self.shop.products.all().count(),1)
+
+    def test_remove_add_order_shop(self):
+        executed = self.client.execute('''
+            mutation RemoveOrderFromShop {
+                removeOrderFromShop(shopId: '''+str(self.shop.pk)+''',orderId: '''+str(self.order.pk)+''') {
+                    shop{
+                        name
+                        orders{
+                            id
+                        }
+                    }
+                    ok
+                }
+            }
+        '''
+        )
+        self.shop.refresh_from_db()
+        self.assertEquals(self.shop.orders.all().count(),0)
+
+        executed = self.client.execute('''
+            mutation AddOrderFromShop {
+                addOrderToShop(shopId: '''+str(self.shop.pk)+''',orderId: '''+str(self.order.pk)+''') {
+                    shop{
+                        name
+                        orders{
+                            id
+                        }
+                    }
+                    ok
+                }
+            }
+        '''
+        )
+        self.shop.refresh_from_db()
+        self.assertEquals(self.shop.orders.all().count(),1)
+
+    def test_add_remove_line_product(self):
+        executed = self.client.execute('''
+            mutation AddLineToProduct {
+                addLineItemToProduct(lineItemId: '''+str(self.line_item.pk)+''',productId: '''+str(self.product.pk)+''') {
+                    product{
+                        name
+                        lineItems{
+                            id
+                        }
+                    }
+                    ok
+                }
+            }
+        '''
+        )
+        self.product.refresh_from_db()
+        self.assertEquals(self.product.line_items.all().count(),1)
+
+        executed = self.client.execute('''
+            mutation RemoveLineFromProduct {
+                removeLineItemFromProduct(lineItemId: '''+str(self.line_item.pk)+''',productId: '''+str(self.product.pk)+''') {
+                    product{
+                        name
+                        lineItems{
+                            id
+                        }
+                    }
+                    ok
+                }
+            }
+        '''
+        )
+        self.product.refresh_from_db()
+        self.assertEquals(self.product.line_items.all().count(),0)
+
+    def test_remove_add_line_order(self):
+        executed = self.client.execute('''
+            mutation RemoveLineFromOrder {
+                removeLineItemFromOrder(lineItemId: '''+str(self.line_item.pk)+''',orderId: '''+str(self.order.pk)+''') {
+                    order{
+                        buyer
+                        lineItems{
+                            id
+                        }
+                    }
+                    ok
+                }
+            }
+        '''
+        )
+        self.order.refresh_from_db()
+        self.assertEquals(self.order.line_items.all().count(),0)
+        self.assertEquals(self.order.value,0)
+
+        executed = self.client.execute('''
+            mutation AddLineItemToOrder {
+                addLineItemToOrder(lineItemId: '''+str(self.line_item.pk)+''',orderId: '''+str(self.order.pk)+''') {
+                    order{
+                        buyer
+                        lineItems{
+                            id
+                        }
+                    }
+                    ok
+                }
+            }
+        '''
+        )
+        self.order.refresh_from_db()
+        self.assertEquals(self.order.line_items.all().count(),1)
+        self.assertEquals(self.order.value,60)
+
+
+        
+
+
 
 
