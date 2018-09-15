@@ -35,9 +35,7 @@ Password: pleasehireme
 ## Prerequisites
 
 - Python 3.5+
-- PostgresQL installed and running on host
-- DB with name "shopdb" created with proper permissions
-- Django and any other pip dependencies it complains about during startup (I will put together a virtual env if I get the chance!)
+- Django django-graphene and any other pip dependencies it complains about during startup (I will put together a virtual env if I get the chance!)
 
 ## Installation and Setup
 
