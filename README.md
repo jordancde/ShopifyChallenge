@@ -35,12 +35,12 @@ Password: pleasehireme
 ## Prerequisites
 
 - Python 3.5+
-- Django django-graphene and any other pip dependencies it complains about during startup (I will put together a virtual env if I get the chance!)
 
 ## Installation and Setup
 
 Clone the repo as-is, and in the root directory, run:
 ```
+source env/bin/activate
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser
