@@ -25,7 +25,7 @@ SECRET_KEY = 'cuhnfzx&&5hqf+ov*4!m_vbv*wqzxmjv@1lyr)_-4&y7t69ku&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -100,15 +100,22 @@ CORS_ORIGIN_REGEX_WHITELIST = (
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_URL = 'http://storage.googleapis.com/shopnet/static/'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
-PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_DIR, 'shopnet.db'),
+        # If you are using Cloud SQL for MySQL rather than PostgreSQL, set
+        # 'ENGINE': 'django.db.backends.mysql' instead of the following.
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'shopdb',
+        'USER': 'admin',
+        'PASSWORD': 'password',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -146,7 +153,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_URL = '/static/'
 WEBPACK_LOADER = {
             'DEFAULT': {
                     'BUNDLE_DIR_NAME': 'bundles/',
