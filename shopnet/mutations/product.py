@@ -18,6 +18,7 @@ class CreateProduct(graphene.Mutation):
     def mutate(self, info, name, value, line_items=None):
         productModel = ProductModel.objects.create(name=name,value=value)
 
+        # Adds all line items from array of ids
         if line_items:
             for l in line_items:
                 productModel.line_items.add(LineItemModel.objects.get(pk=l))
@@ -48,6 +49,7 @@ class UpdateProduct(graphene.Mutation):
         if name:
             productModel.name = name
 
+        # Clears line items and recreates with id list
         if line_items is not None:
             productModel.line_items.clear()
             
@@ -88,8 +90,11 @@ class DeleteProduct(graphene.Mutation):
     def mutate(self, info, id):
         productModel = ProductModel.objects.get(id=id)
 
+        # Deletes related line items
         for line_item in productModel.line_items.all():
             line_id = line_item.pk
+
+            # Gets list of orders that contain the line item
             related_orders = OrderModel.objects.filter(line_items__in=[line_id])
 
             # updates related orders

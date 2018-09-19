@@ -19,6 +19,7 @@ class CreateLineItem(graphene.Mutation):
 
         productModel = ProductModel.objects.get(pk=product)
 
+        # Creates django model
         lineItemModel = LineItemModel.objects.create(
             quantity=quantity,
             product=productModel,
@@ -60,6 +61,7 @@ class UpdateLineItem(graphene.Mutation):
         if quantity or product:
             lineItemModel.recalculate_value()
 
+            # Iterates through orders using this line item, and updates their values
             related_orders = OrderModel.objects.filter(line_items__in=[id])
             
             for order in related_orders:
@@ -86,6 +88,7 @@ class DeleteLineItem(graphene.Mutation):
     def mutate(self, info, id):
         lineItemModel = LineItemModel.objects.get(id=id)
 
+        # Iterates through orders using this line item, and updates their values
         related_orders = OrderModel.objects.filter(line_items__in=[id])
         
         for order in related_orders:

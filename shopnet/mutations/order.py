@@ -17,10 +17,13 @@ class CreateOrder(graphene.Mutation):
     def mutate(self, info, buyer, line_items=None):
         orderModel = OrderModel.objects.create(buyer=buyer)
 
+        # If a list of line itema is providedm adds models referenced by ids to order
         if line_items is not None:
             for l in line_items:
                 line_model = LineItemModel.objects.get(pk=l)
                 orderModel.line_items.add(line_model)
+
+            # Recalculates the order value with the new line items
             orderModel.recalculate_value()
 
         orderModel.save()
@@ -50,12 +53,14 @@ class UpdateOrder(graphene.Mutation):
         if buyer:
             orderModel.buyer = buyer
 
+        # Clears existing line items, then adds from new list
         if line_items is not None:
             orderModel.line_items.clear()
             
             for l in line_items:
                 orderModel.line_items.add(LineItemModel.objects.get(pk=l))
 
+            # Recalculates value based on new line items
             orderModel.recalculate_value()        
         
         orderModel.save()
@@ -80,6 +85,7 @@ class DeleteOrder(graphene.Mutation):
     def mutate(self, info, id):
         orderModel = OrderModel.objects.get(id=id)
 
+        # Deletes line items associated with order
         for line_item in orderModel.line_items.all():
             line_item.delete()
 

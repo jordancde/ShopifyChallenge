@@ -4,6 +4,7 @@ from shopnet.models import ShopModel, ProductModel, OrderModel, LineItemModel
 from graphene_django import converter, utils
 from shopnet.mutations import line_item, order, product, shop
 
+# READ queries
 class Query(graphene.ObjectType):
 
     shops = graphene.List(shop.Shop)
@@ -23,7 +24,7 @@ class Query(graphene.ObjectType):
     def resolve_lineitems(self, info):
         return LineItemModel.objects.all()
 
-
+# All mutations
 class MyMutations(graphene.ObjectType):
 
     create_shop = shop.CreateShop.Field()
@@ -51,5 +52,6 @@ class MyMutations(graphene.ObjectType):
     remove_line_item_from_product = product.RemoveLineItemFromProduct.Field()
     remove_line_item_from_order = order.RemoveLineItemFromOrder.Field()
 
+# The GraphQL Schema
 schema = graphene.Schema(query=Query, mutation=MyMutations)
 
