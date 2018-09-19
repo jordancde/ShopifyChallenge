@@ -5,7 +5,7 @@
 
 This project was built using Django and Django-graphene. I haven't used GraphQL before so please forgive any conventions best practices, etc. I haven't followed! I've tried my best to follow the provided documentation.
 
-This project is live and deployed via Kubernetes as of this commit. Please see the [Demo](#demo) section to access it.
+This project is live and deployed as of this commit. Please see the [Demo](#demo) section to access it.
 
 # Table of Contents
 - [Demo](#demo)
@@ -23,7 +23,13 @@ This project is live and deployed via Kubernetes as of this commit. Please see t
 
 ## Demo
 
-This demo has been deployed to a Kubernetes Cluster and is accessible at [link](http:website.com).
+Okay, so I tried getting it going on a Kubernetes Cluster for three days, here's what happened:
+- I got the webapp up and running by following [these docs](https://cloud.google.com/python/django/kubernetes-engine).
+- The webapp was running fine, but was unable to connect to the PostgresQL db.
+- I looked around for an explanation for the error online, talked to some devs, and got in touch with google technical support but couldn't find out why.
+- Eventually, I decided to follow [these unofficial docs](https://www.agiliq.com/blog/2018/07/django-on-kubernetes/) which runs the postgresQL server within the Kubernetes cluster.
+
+This demo has been deployed to a Kubernetes Cluster and is accessible [here](http://35.190.77.113/graphql).
 
 The demo is login protected, and the credentials to access the GraphiQL dashboard are as follows:
 ```
@@ -35,12 +41,15 @@ Password: pleasehireme
 ## Prerequisites
 
 - Python 3.5+
+- If running locally, have a local PostgresQL server running and create a db based on the database settings in settings.py.
 
 ## Installation and Setup
 
 Clone the repo as-is, and in the root directory, run:
 ```
 source env/bin/activate
+pip install -r requirements.txt
+
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser
