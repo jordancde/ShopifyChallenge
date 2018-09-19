@@ -24,8 +24,8 @@ class CreateProduct(graphene.Mutation):
                 productModel.line_items.add(LineItemModel.objects.get(pk=l))
 
         product = Product(
-            name=name, 
-            value=value,
+            name=productModel.name, 
+            value=productModel.value,
             line_items=productModel.line_items.all(),
         )
 
@@ -54,7 +54,7 @@ class UpdateProduct(graphene.Mutation):
             productModel.line_items.clear()
             
             for l in line_items:
-                productModel.line_items.add(LineItemModel.objects.get(pk=p))
+                productModel.line_items.add(LineItemModel.objects.get(pk=l))
         
         if value:
             productModel.value = value

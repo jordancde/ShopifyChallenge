@@ -26,10 +26,10 @@ class CreateShop(graphene.Mutation):
         # Adds orders in param to shop order list
         if orders is not None:
             for o in orders:
-                shopModel.orders.add(OrderModel.objects.get(pk=p))
+                shopModel.orders.add(OrderModel.objects.get(pk=o))
         
         shop = Shop(
-            name=name, 
+            name=shopModel.name, 
             products=shopModel.products.all(),
             orders=shopModel.orders.all(),
         )
@@ -63,12 +63,12 @@ class UpdateShop(graphene.Mutation):
         if orders is not None:
             shopModel.orders.clear()
             for o in orders:
-                shopModel.orders.add(OrderModel.objects.get(pk=p))
+                shopModel.orders.add(OrderModel.objects.get(pk=o))
         
         shopModel.save()
 
         shop = Shop(
-            name=name, 
+            name=shopModel.name, 
             products=shopModel.products.all(),
             orders=shopModel.orders.all(),
         )

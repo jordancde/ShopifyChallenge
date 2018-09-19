@@ -30,7 +30,7 @@ class CreateOrder(graphene.Mutation):
 
         order = Order(
             value=orderModel.value,
-            buyer=buyer, 
+            buyer=orderModel.buyer, 
             line_items=orderModel.line_items.all()
         )
 
